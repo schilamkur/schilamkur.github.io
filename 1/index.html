@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 40px);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .gallery-item p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
 
+    <h1>My Image Gallery</h1>
+    <p>Here are some of the images I've created, with descriptions explaining each piece.</p>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="image1.jpg" alt="Image 1">
+            <h3>Image Title 1</h3>
+            <p>This is a brief explanation of what Image 1 represents, how it was created, and what tools were used.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="image2.jpg" alt="Image 2">
+            <h3>Image Title 2</h3>
+            <p>This is a brief explanation of what Image 2 represents, how it was created, and what tools were used.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="image3.jpg" alt="Image 3">
+            <h3>Image Title 3</h3>
+            <p>This is a brief explanation of what Image 3 represents, how it was created, and what tools were used.</p>
+        </div>
+        <!-- Add more gallery items as needed -->
+    </div>
+
+    <p><a href="../index.html">Back to Portfolio</a></p>
+
+</body>
+</html>
