@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: 
+                linear-gradient(rgba(255, 204, 203, 0.5), rgba(209, 231, 221, 0.5))
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 40px);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .gallery-item p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .gallery-item img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .center-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-text">
+        <h1>CS 180 Project 2: Fun with Filters and Frequencies!</h1>
+        <h2>Siddharth Chilamkur</h2>
+    </div>
+
+    <section>
+        <h3>Introduction</h3>
+        <p>We will be investigating frequencies and filters in this project, looking at 
+            how they will help us with sharpening images, blending images, and making hybrid images. 
+            We start with looking at filters, and then move to frequencies in the second part.
+        </p>
+    </section>
+
+    <section>
+        <h3>Finite Difference Operator</h3>
+        <p> Here, we will be using the finite difference operators Dx = [1, -1] and 
+            Dy = [1, -1]^T to ultimately end up with a binarized image. We first convolve 
+            the image with each difference operator separately, giving us the partial derivative 
+            in the x and y directions. Next, we find the gradient magnitude of the image, 
+            which is computed by taking the euclidean norm of each of the two partial derivatives. 
+            The two partial derivatives are part of the gradient, which is calculated by taking 
+            the derivative of the image along both the x and y directions (this is what the convolutions 
+            with the finite difference operators are). The gradient magnitude is the overall rate of 
+            change of intensity at that point. Lastly, we find the binarized image using the threshold of about 0.35.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/cameraman.png" alt="Cameraman">
+            <h3>Original Cameraman</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_deriv_x.jpg" alt="Cameraman">
+            <h3>Cameraman with X Finite Difference Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_deriv_y.jpg" alt="Cameraman">
+            <h3>Cameraman with Y Finite Difference Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_grad_mag.jpg" alt="Cameraman">
+            <h3>Gradient Magnitude of Cameraman</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_binary.jpg" alt="Cameraman">
+            <h3>Binarized Cameraman</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Derivative of Gaussian Filter</h3>
+        <p> We now move on to the DoG Filter, which can help produce a less noisy end 
+            binarized result. We will investigate how the order of filters affects this 
+            end result. We first convolve the image with a gaussian filter, and then use 
+            the finite difference operators to get the binarized image like we did in the 
+            previous part. This seems to give a much more defined and less noisy final image 
+            than what we did in the previous part. The binarized threshold was 0.35.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/cameraman_gauss_deriv_x.jpg" alt="Cameraman">
+            <h3>Cameraman with X Finite Difference Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_gauss_deriv_y.jpg" alt="Cameraman">
+            <h3>Cameraman with Y Finite Difference Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_gauss_grad_mag.jpg" alt="Cameraman">
+            <h3>Gradient Magnitude of Cameraman</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_gauss_binary.jpg" alt="Cameraman">
+            <h3>Binarized Cameraman</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Derivative of Gaussian Filter, Other Way</h3>
+        <p> This time we first convolve each of the finite difference operators 
+            with the gaussian filter, and then follow the procedure from part one to 
+            get the final binarized image. The result is pretty much the same as the previous 
+            setup of the filters. The binarized threshold was 0.35.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/cameraman_dog_x.png" alt="Cameraman">
+            <h3>X DoG Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_dog_y.png" alt="Cameraman">
+            <h3>Y DoG Filter</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_dog_grad_mag.jpg" alt="Cameraman">
+            <h3>Gradient Magnitude of Cameraman</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/cameraman_dog_binary.jpg" alt="Cameraman">
+            <h3>Binarized Cameraman</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Image "Sharpening"</h3>
+        <p> We want to enhance the images below in this part, which we can do 
+            subtracting the blurred image (created using a gaussian filter) from 
+            the original image, getting the high-frequency features that we add back 
+            to the original image using an alpha weighting, which helps "sharpen" the image.
+        </p>
+    </section>
+
+    <section>
+        <h3>Taj Mahal</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/blurry_taj.jpg" alt="Taj">
+            <h3>Blurry Taj Mahal</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_taj_alpha2.jpg" alt="Taj">
+            <h3>Sharp Taj Mahal: alpha = 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_taj_alpha3.jpg" alt="Taj">
+            <h3>Sharp Taj Mahal: alpha = 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_taj_alpha4.jpg" alt="Taj">
+            <h3>Sharp Taj Mahal: alpha = 4</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_taj_alpha5.jpg" alt="Taj">
+            <h3>Sharp Taj Mahal: alpha = 5</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_taj_alpha6.jpg" alt="Taj">
+            <h3>Sharp Taj Mahal: alpha = 6</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Orange</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/blurry_orange.jpg" alt="Orange">
+            <h3>Blurry Orange</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_orange_alpha2.jpg" alt="Orange">
+            <h3>Sharp Orange: alpha = 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_orange_alpha3.jpg" alt="Orange">
+            <h3>Sharp Orange: alpha = 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_orange_alpha4.jpg" alt="Orange">
+            <h3>Sharp Orange: alpha = 4</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_orange_alpha5.jpg" alt="Orange">
+            <h3>Sharp Orange: alpha = 5</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_orange_alpha6.jpg" alt="Orange">
+            <h3>Sharp Orange: alpha = 6</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Bear</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/blurry_bear.jpg" alt="Bear">
+            <h3>Blurry Bear</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_bear.jpg" alt="Bear">
+            <h3>Sharp Bear</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Turtle</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/blurry_turtle.jpg" alt="Turtle">
+            <h3>Blurry Turtle</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_turtle.jpg" alt="Turtle">
+            <h3>Sharp Turtle</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Dr. House Sharp Image, Blurred, Then Sharpened</h3>
+        <p> The final sharpened image seems to be even clearer than the 
+            original image, but there same to be a couple of hard features that 
+            don't seem to have been recovered in the sharpened image after the 
+            initial blurring lost them.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/original_dr_house.jpg" alt="House">
+            <h3>Original Dr. House</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/blurry_dr_house.jpg" alt="House">
+            <h3>Blurry Dr. House</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/sharp_dr_house.jpg" alt="House">
+            <h3>Sharp Dr. House</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Hybrid Images</h3>
+        <p> This is probably my favorite section in the project, as hybrid images 
+            are images that when viewed at different distances seem to be different 
+            images to the viewer. There are two parts to this: the high-frequency and 
+            the low-frequency components. The high-frequency image is found by subtracting 
+            a smoothed (in this case by a gaussian) version of the original image from the 
+            original image itself. This contains the high-frequency components, including 
+            edges and textures. The low-frequency image is calculated by simply applying a 
+            gaussian filter to the image, which gives the broad features of the image. Bells & 
+            Whistles: I created these hybrid images while already utilizing color.
+        </p>
+    </section>
+
+    <section>
+        <h3>Derek and Nutmeg</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/DerekPicture.jpg" alt="Derek">
+            <h3>Original Derek</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/nutmeg.jpg" alt="Nutmeg">
+            <h3>Original Nutmeg</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hybrid_Derek_Nutmeg.jpg" alt="Hybrid">
+            <h3>Hybrid Derek and Nutmeg</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Lewis Hamilton</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/original_hamilton.jpg_large" alt="Hamilton">
+            <h3>Original Hamilton</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/original_goat.webp" alt="Goat">
+            <h3>Original Goat</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hybrid_hamilton_goat.jpg" alt="Hybrid">
+            <h3>Hybrid Goat Hamilton</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Lewis Hamilton Fourier Evaluation</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/Hamilton_frequency.png" alt="Hybrid">
+        </div>
+    </div>
+
+    <section>
+        <h3>Marvel</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/original_captain_america.jpg" alt="Captain">
+            <h3>Original Captain America</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/original_iron_man.webp" alt="Iron Man">
+            <h3>Original Iron Man</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hybrid_marvel.jpg" alt="Hybrid">
+            <h3>Hybrid Marvel</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Star Wars</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/kenobi_original.jpg" alt="Kenobi">
+            <h3>Original Obi-Wan Kenobi</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/skywalker_original.jpg" alt="Skywalker">
+            <h3>Original Anakin Skywalker</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hybrid_star_wars.jpg" alt="Hybrid">
+            <h3>Hybrid Star Wars</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Failure: Mascots</h3>
+        <p> The two images are not similar in shape or position in their original images, leading to 
+            a not so great hybrid image of the two mascots, with the 49ers mascot being washed out.</p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/original_49ers.jpg" alt="49ers">
+            <h3>Original 49ers Mascot</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/original_kings.png" alt="Kings">
+            <h3>Original Kings Mascot</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hybrid_49ers_kings.jpg" alt="Hybrid">
+            <h3>Hybrid Mascot</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Gaussian and Laplacian Stacks</h3>
+        <p> Before we get into multi-resolution blending, we start with gaussian and 
+            laplacian Stacks. A gaussian stack is a representation of the image, just in 
+            multiple levels, where each level is calculated by applying a gaussian filter 
+            to the previous level. As we keep going to the next level, we get smoother 
+            features, which helps us with laplacian stacks and blending. For laplacian 
+            stacks, we find these by subtracting two levels of the gaussian stack to get 
+            the high-frequency components at each level, which helps with blending later on.
+        </p>
+    </section>
+
+    <section>
+        <h3>Gaussian Stacks</h3>
+    </section>
+
+    <section>
+        <h3>Apple</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/apple_gaussian_level0.jpg" alt="Apple">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_gaussian_level1.jpg" alt="Apple">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_gaussian_level2.jpg" alt="Apple">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_gaussian_level3.jpg" alt="Apple">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_gaussian_level4.jpg" alt="Apple">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Orange</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/orange_gaussian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_gaussian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_gaussian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_gaussian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_gaussian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Laplacian Stacks</h3>
+    </section>
+
+    <section>
+        <h3>Apple</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/apple_laplacian_stack_level0.jpg" alt="Apple">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_laplacian_stack_level1.jpg" alt="Apple">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_laplacian_stack_level2.jpg" alt="Apple">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_laplacian_stack_level3.jpg" alt="Apple">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/apple_laplacian_stack_level4.jpg" alt="Apple">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Orange</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/orange_laplacian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_laplacian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_laplacian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_laplacian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/orange_laplacian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Multiresolution Blending</h3>
+        <p> This is the final part of the project, where we merge images while preserving 
+            their features and textures. We blend at each level of the laplacian stack to allow 
+            for a smooth transition in the blending process. We use a mask to determine which portions 
+            of each image should be blended together (the oraple is a vertical seam while the hamilton 
+            and avengers is a circular mask). The mask is also made into a gaussian stack to create a 
+            nice, well transitioned seam. Bells and Whistles: I did this part with color from the start.
+        </p>
+    </section>
+
+    <section>
+        <h3>Oraple</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/apple.jpeg" alt="Apple">
+            <h3>Apple</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/orange.jpeg" alt="Orange">
+            <h3>Orange</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/blended_oraple.jpg" alt="Blend">
+            <h3>Oraple</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Stormy Sunsets</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/sunset.webp" alt="Sunset">
+            <h3>First Sunset</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/sunrise.webp" alt="Sunrise">
+            <h3>Second Sunset</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/blended_sun.jpg" alt="Blend">
+            <h3>Stormy Sunsets</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>New Avenger: Lewis Hamilton</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/hamilton.jpeg" alt="Hamilton">
+            <h3>Hamilton</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/avengers.jpg" alt="Avengers">
+            <h3>Avengers</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/blended_hamilton_avengers.jpg" alt="Blend">
+            <h3>New Avenger: Lewis Hamilton</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Hamilton Laplacian Stack</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/hamilton_laplacian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hamilton_laplacian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hamilton_laplacian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hamilton_laplacian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hamilton_laplacian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Avengers Laplacian Stack</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/avengers_laplacian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/avengers_laplacian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/avengers_laplacian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/avengers_laplacian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/avengers_laplacian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Mask Gaussian Stack</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/mask_gaussian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/mask_gaussian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/mask_gaussian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/mask_gaussian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/mask_gaussian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Combined Laplacian Stack</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/combined_laplacian_stack_level0.jpg" alt="Orange">
+            <h3>Original</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/combined_laplacian_stack_level1.jpg" alt="Orange">
+            <h3>Level 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/combined_laplacian_stack_level2.jpg" alt="Orange">
+            <h3>Level 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/combined_laplacian_stack_level3.jpg" alt="Orange">
+            <h3>Level 3</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/combined_laplacian_stack_level4.jpg" alt="Orange">
+            <h3>Level 4</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Takeaway</h3>
+        <p> I learned quite a few things in this project, and really enjoyed playing with 
+            a variety of blending and hybrid images. One of the most important things I learned 
+            was dealing with normalization and conversions of data types, whether it be on intermediate 
+            levels in the stack or with finalized images, as the conversions seemed to mess with 
+            my images when I switched between cv2 and plt and sk while also converting and normalizing.
+        </p>
+    </section>
