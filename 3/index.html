@@ -138,7 +138,8 @@
     <section>
         <h3>Part 3</h3>
         <p> Now that we can warp to the mid-way shape, we can create a morph sequence 
-            that shows a nice morphing between the two images below.
+            that shows a nice morphing between the two images below. (Reload the page to see 
+            the gif if you want to see the gif again)
         </p>
     </section>
 
@@ -148,10 +149,15 @@
 
     <div class="gallery">
         <div class="gallery-item">
-            <img src="images/results/morph_sequence.gif?v=1" alt="Morphing Sequence" />
+            <img id="morphGif" alt="Morph From Author's Face to Hamilton's Face" />
             <h3>Morph From Author's Face to Hamilton's Face</h3>
         </div>
     </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('morphGif').src = "images/results/morph_sequence.gif?" + randomNum;
+    </script>
 
     <section>
         <h3>Part 4</h3>
