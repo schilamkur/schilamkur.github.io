@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: 
+                linear-gradient(rgba(255, 204, 203, 0.5), rgba(209, 231, 221, 0.5))
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 40px);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .gallery-item p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .gallery-item img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .center-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-text">
+        <h1>Face Morphing</h1>
+    </div>
+
+    <section>
+        <h3>Introduction</h3>
+        <p>Here, we will be investigating morphing: transforming one image into another. 
+            All morphs boil down to warping and cross-dissolving images, tools which let us 
+            compute and output a morph. We will be doing this in steps: defining correspondences, 
+            computing the midway face, showing a morph sequence, calculating the "mean-face" of 
+            a population, creating caricatures, and changing features of images.
+        </p>
+    </section>
+
+    <section>
+        <h3>Step 1</h3>
+        <p> First, we define a set of corresponding points between the two images. The 
+            keypoints picked usually correspond to significant features on the face, and I picked 
+            them using my own function, which used the ginput tool. Then, I calculated the midway face, 
+            the average of the two faces, and then ran Delaunay Triangulation on them. Images with both the 
+            points and the triangulation set on the two images are below.
+        </p>
+    </section>
+
+    <section>
+        <h3>Triangulation and Key Points on Each Image</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/my_image_triangulation.png" alt="Cameraman">
+            <h3>My Image</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/hamilton_image_triangulation.png" alt="Cameraman">
+            <h3>Hamilton Image</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 2</h3>
+        <p> Now we reach one of the most important steps, the 
+            computation of the midway face. Using the average shape and after computing the 
+            inverse of the transformation matrix between each triangle in the original image with 
+            the corresponding triangle in the average shape, we are able to warp the image, using 
+            a polygon mask. We then cross-dissolve to get the midway face.
+        </p>
+    </section>
+
+    <section>
+        <h3>Original Images</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/my_image.jpg" alt="Cameraman">
+            <h3>My Image</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/hamilton_image.jpg" alt="Cameraman">
+            <h3>Hamilton Image</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Mid-Way Face</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/midway_face.jpg" alt="Cameraman">
+            <h3>Mid-Way Face</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 3</h3>
+        <p> Now that we can warp to the mid-way shape, we can create a morph sequence 
+            that shows a nice morphing between the two images below. (Reload the page to see 
+            the gif if you want to see the gif again)
+        </p>
+    </section>
+
+    <section>
+        <h3>Morph Sequence</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="morphGif" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Morph From Author's Face to Hamilton's Face</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('morphGif').src = "images/results/morph_sequence.gif?" + randomNum;
+    </script>
+
+    <section>
+        <h3>Step 4</h3>
+        <p> Now, we are going to be calculating the mean face of a population. We will be 
+            looking at a data set (IMM database) of the Danish population, specifically the 37 images from the 
+            initial dataset. This set consisted of 30 males and 7 females, and the mean face was 
+            computed after reading in the asf and bmp files in the dataset. The asf files contained 
+            the necessary keypoints needed to help with the computation of the mean face of the population. 
+            Below, are a few of the images warped to the mean face. I then warped my face to the mean face and  
+            then warped the mean face to my face.
+        </p>
+    </section>
+
+    <section>
+        <h3>Mean Face</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/average_dane_face.jpg" alt="Taj">
+            <h3>Mean Face: IMM Database</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Warped Faces</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/warped_dane_face_1.jpg" alt="Orange">
+            <h3>Warped Image 1</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/warped_dane_face_2.jpg" alt="Orange">
+            <h3>Warped Image 2</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/warped_dane_face_3.jpg" alt="Orange">
+            <h3>Warped Image 3</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>My Face Warped to Mean Face and Mean Face Warped to My Face</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/my_face_to_dane.jpg" alt="Orange">
+            <h3>My Face Warped to Mean Face</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/dane_to_my_face.jpg" alt="Orange">
+            <h3>Mean Face Warped to My Face</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 5</h3>
+        <p> Here we will be working with caricatures, which is an exaggeration of features, 
+            which we will be doing by warping faces to an exaggerated version of the average 
+            face shape. I did this process to both my face and an image from the IMM database.
+        </p>
+    </section>
+
+    <section>
+        <h3>Caricatures</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/my_face_caricature.jpg" alt="Derek">
+            <h3>Caricature of My Image</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/dane_caricature.jpg" alt="Nutmeg">
+            <h3>Caricature of Image from IMM dataset</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Interesting Experiment</h3>
+        <p> I decided to try an ethnicity change on my face using an "average" caucasian male 
+            face. There were methods explored: only morphing shape (warping), only morphing 
+            appearance (cross-dissolving), and morphing both of them.
+        </p>
+    </section>
+
+    <section>
+        <h3>Original Images</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/data/my_image.jpg" alt="Apple">
+            <h3>My Image</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/data/average_white_male_image.png" alt="Apple">
+            <h3>Average Caucasian Male Average</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Morphing</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/results/bw_appearance_morph_face.jpg" alt="Apple">
+            <h3>Just Appearance Morphing</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/bw_shape_morph_face.jpg" alt="Apple">
+            <h3>Just Shape Morphing</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/results/bw_midway_face.jpg" alt="Apple">
+            <h3>Both Appearance and Shape Morphing</h3>
+        </div>
+    </div>

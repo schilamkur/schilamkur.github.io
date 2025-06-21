@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: 
+                linear-gradient(rgba(255, 204, 203, 0.5), rgba(209, 231, 221, 0.5))
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 40px);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .gallery-item p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .gallery-item img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .center-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-text">
+        <h1>Neural Radiance Fields (NeRF)</h1>
+    </div>
+
+    <section>
+        <h3>Introduction</h3>
+        <p>Here, we will be exploring Neural Radiance Fields (NeRF), which are used to 
+            represent a 3D space. They can accurately capture reflections and other spatial 
+            attributes, which allows them to still show the physical aspects of something while 
+            also providing new views.
+        </p>
+    </section>
+
+    <section>
+        <h3>Creating the Neural Field</h3>
+        <p> In this part, we will create a neural field to learn the images.
+        </p>
+    </section>
+
+    <section>
+        <h3>Original Images</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/fox.jpg" alt="Cameraman">
+            <h3>Fox</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/san_fran.jpg" alt="Cameraman">
+            <h3>San Francisco</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Phase 1</h3>
+        <p> In this step, we implement the MLP, which is the foundation of the neural field. It is a 
+            four layered structure, going from an x that is 2D to an rgb that is 3D. We also create 
+            a sinusoidal positional encoder to expand the input's dimensionality, thereby helping the 
+            model learn more complexity.
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 2</h3>
+        <p> Now we create a dataloader to take the image, and then randomly sample and return pixels for 
+            every iteration in the training cycle. 
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 3</h3>
+        <p> The next part is the loss function, the optimizer, and the metric used to evaluate. We used 
+            MSE for the loss function, while also using the Adam optimizer. The metric is PSNR, or 
+            peak signal-to-noise ratio, calculated through the ratio of max power a signal and the max 
+            power of corrupting noise.
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 4</h3>
+        <p> This is the training, where I created two models for the fox image, while also 
+            creating a model for san francisco, creating a gif for each to show how the iterations function. 
+            The batch size was 10,000.
+        </p>
+    </section>
+
+    <section>
+        <h3>Fox, Learning Rate 5e-3, and L=10</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/finallr5e-3l10.png" alt="Cameraman">
+            <h3>Final Fox Image (3000 iterations)</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/psnr_foxlr5e-3l10.png" alt="Cameraman">
+            <h3>PSNR Graph</h3>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="morphGif" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Morph From Author's Face to Hamilton's Face</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('morphGif').src = "images/fox_traininglr5e-3l10.gif?" + randomNum;
+    </script>
+
+    <section>
+        <h3>Fox, Learning Rate 1e-3, and L=12</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/finallr1e-3l12.png" alt="Cameraman">
+            <h3>Final Fox Image (3000 iterations)</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/psnr_foxlr1e-3l12.png" alt="Cameraman">
+            <h3>PSNR Graph</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/foxiter100.jpg" alt="Cameraman">
+            <h3>Fox 100 iterations</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/foxiter200.jpg" alt="Cameraman">
+            <h3>Fox 200 iterations</h3>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="Gif2" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Gif of Fox</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('Gif2').src = "images/fox_traininglr1e-3l12.gif?" + randomNum;
+    </script>
+
+    <section>
+        <h3>San Francisco, Learning Rate 5e-3, and L=10</h3>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/san_fran_final.png" alt="Cameraman">
+            <h3>Final San Francisco Image (3000 iterations)</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/psnr_san_fran.png" alt="Cameraman">
+            <h3>PSNR Graph</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/sanfraniter100.jpg" alt="Cameraman">
+            <h3>San Francisco 100 iterations</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/sanfraniter200.jpg" alt="Cameraman">
+            <h3>San Francisco 200 iterations</h3>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="Gif3" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Gif of San Francisco</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('Gif3').src = "images/san_fran_training.gif?" + randomNum;
+    </script>
+
+    <section>
+        <h3>Implementing Neural Radiance Fields (NeRF)</h3>
+        <p> Here, we will be implementing the Neural Radiance Fields (NeRF).
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 1</h3>
+        <p> Here, we create rays from cameras. We implemented the generation of rays using c2w matrices 
+            and focal length, first using a transform function to convert into world coordinates, 
+            and then implementing both pixel to camera and pixel to ray, both of which involved transforming 
+            the pixel into either camera coordinates or ray origins.
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 2</h3>
+        <p> Here, we sampled from the rays, sampling 64 samples along the ray, and then offsetting 
+            by 0.5 pixels. 
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 3</h3>
+        <p> Here, we implemented a dataloader, which takes in images, c2w matrix, and the K matrix, to compute the 
+            rays for each image. Then, sampled a batch of rays, an example of which is below:
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/rays.png" alt="Taj">
+            <h3>Ray Sampling</h3>
+        </div>
+    </div>
+
+    <section>
+        <h3>Phase 4</h3>
+        <p> Here, we implemented the NeRF model, which has an MLP that takes in a ray origin, direction, and depth, 
+            and outputs color and density values. We used positional encoding again, and then had two branches of MLP 
+            dealing with color and density. We trained this model using a learning rate of 1e-3 and a batch size of 10000.
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 5</h3>
+        <p> Here, we implemented volume rendering, which is basically a weighted average based on the probability of 
+            the ray not terminating before the current depth. 
+        </p>
+    </section>
+
+    <section>
+        <h3>Phase 6</h3>
+        <p> Here, we finally were able to train the model, using the adam optimizer and a learning rate of 
+            1e-3 and a batch size of 10000. We initially trained with 3000 iterations, but eventually trained with 10000 
+            iterations for the final render, taking about 30 minutes to run.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/psnr_nerf_og.png" alt="Orange">
+            <h3>PSNR Graph</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/final_render.jpg" alt="Orange">
+            <h3>Final Render</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/lego_iter100.jpg" alt="Orange">
+            <h3>Result at 100 iterations</h3>
+        </div>
+        <div class="gallery-item">
+            <img src="images/lego_iter200.jpg" alt="Orange">
+            <h3>Result at 200 iterations</h3>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="Gif4" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Gif of 10k Iteration Model</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('Gif4').src = "images/render_training.gif?" + randomNum;
+    </script>
+
+    <section>
+        <h3>Depth Rendering Implementation</h3>
+        <p> Here we implemented depth rendering, where we accumulated depth instead of color in the 
+            volume rendering algorithm, the result of which is below:
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img id="Gif5" alt="Morph From Author's Face to Hamilton's Face" />
+            <h3>Gif of Depth Rendering</h3>
+        </div>
+    </div>
+
+    <script>
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById('Gif5').src = "images/depth_training.gif?" + randomNum;
+    </script>

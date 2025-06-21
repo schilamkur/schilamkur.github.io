@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: 
+                linear-gradient(rgba(255, 204, 203, 0.5), rgba(209, 231, 221, 0.5))
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 40px);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .gallery-item p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .gallery-item img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .center-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-text">
+        <h1>Diffusion</h1>
+    </div>
+
+    <section>
+        <h3>Introduction</h3>
+        <p>Here we will be investigating morphing, starting with first 
+            exploring diffusion, and then building diffusion models.
+        </p>
+    </section>
+
+    <section>
+        <h3>Diffusion Exploration</h3>
+    </section>
+
+    <section>
+        <h3>Initial steps</h3>
+        <p>I am using a random seed of 30, and below are the caption output pairs for 
+            the model for three separate text prompts.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA0.png" alt="Cameraman">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 1</h3>
+        <p> Now we are implementing the forward process, which involves taking 
+            a clean image and adding noise to it. Basically, given a clean image, we 
+            can get a noisy image at time step t by sampling from a Gaussian. The test images 
+            below are at 250, 500, and 750 noise levels.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.1.png" alt="Cameraman">
+        </div>
+    </div>
+
+
+    <section>
+        <h3>Step 2</h3>
+        <p> This next part is classical denoising, where I remove the noise from 
+            the images from the previous part using Gaussian blur filtering. There are 
+            not great results from this.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.2.png" alt="Cameraman">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 3</h3>
+        <p> This next part is one step denoising, where we use a pre-trained UNet to 
+            recover Gaussian noise from the image, which means that we can try to recover the image 
+            using what the model thinks is Gaussian noise. We use the prompt "a high quality photo".
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.3.1.png" alt="Cameraman">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.3.2.png" alt="Cameraman">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.3.3.png" alt="Cameraman">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 4</h3>
+        <p> In this step, I implement iterative denoising, where I use strided timesteps to 
+            "skip" steps in the iterative denoising process, which allows us to properly denoise 
+            and get a pretty clean image. The first set of images is the iterative denoising every 
+            five steps.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.4.1.png" alt="Taj">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.4.2.png" alt="Taj">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.4.3.png" alt="Taj">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.4.4.png" alt="Taj">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.4.5.png" alt="Taj">
+        </div>
+    </div>
+
+    <section>
+        <h3>Results From Different Types of Denoising</h3>
+        <p> From left to right, original image, noisy image, clean image using iterative denoising, 
+            clean image using one step denoising, and clean image using gaussian blur.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.4.6.png" alt="Taj">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 5</h3>
+        <p> Here, we are now doing diffusion model sampling, where we use a diffusion model to sample 
+            an image. We are generating images from scratch using the prompt "a high quality photo", starting 
+            with random noise.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.5.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 6</h3>
+        <p> Here, we are doing Classifier Free Guidance to improve the image quality that came from the previous section. 
+            We basically use the conditioned and unconditioned noise estimate on a text prompt to better compute a noise 
+            estimate and therefore denoise better.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.6.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 7</h3>
+        <p> Here, we are going to take an original image, then force it back to the original image manifold after 
+            adding some noise, a process whose results are shown below.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.7.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 8</h3>
+        <p> Here, we are going to do the same thing, except with 1 web image, and 2 hand-drawn 
+            images below (original images on the left).
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.7.11og.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.7.11.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.7.12og.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.7.12.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.7.13og.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.7.13.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 9</h3>
+        <p> Here, we are going to work with inpainting, where we implement inpainting, 
+            using a binary mask.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.7.2.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 10</h3>
+        <p> Here, we are going to use the same principle we used, except create a visual anagram, 
+            where you can see one image when the canvas is oriented one way, and then you can see a second image 
+            when the canvas is oriented the other way.
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.8.1.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.8.2.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.8.3.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 11</h3>
+        <p> Here, we are going to create hybrid images using factorized diffusion. We are creating a lowpass and 
+            highpass again, and this allows us to see an image when close, and an image when far. 
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartA1.10.1.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.10.2.png" alt="Orange">
+        </div>
+        <div class="gallery-item">
+            <img src="images/PartA1.10.3.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Building Diffusion Models</h3>
+    </section>
+
+    <section>
+        <h3>Step 1</h3>
+        <p> Here, we are starting with training a simple UNET denoiser, using a sigma value 
+            of 0.5 for noise level. We are optimizing over an L2 loss, and we train the denoiser 
+            over noisy + clean pairs. Below (from top to bottom) is a visualization of the noising process, 
+            training plot of loss, sample results on the test set, and sample results on the test set 
+            for all the sigma values. 
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB1.2.1.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB1.2.2.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB1.2.3.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB1.2.4.png" alt="Orange">
+        </div>
+    </div>
+
+    <section>
+        <h3>Step 2</h3>
+        <p> Here, we add time-conditioning to the UNet, starting with predicting added noise to the image. 
+            Then, we add a scalar t into the UNet to condition it, using an FCBlock. Now, using a random t and image, 
+            we train the UNet to predict the noise. Then, we sample from the UNet. Below (from the top down), we have 
+            a sample from the 5th epoch, and then the training curve for the entire training process, and then the 
+            sample from the 20th epoch. 
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB2.1.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB2.2.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB2.3.png" alt="Orange">
+        </div>
+    </div>
+    </div>
+
+    <section>
+        <h3>Step 3</h3>
+        <p> Here, we add class-conditioning to the UNet, where we want to gain better control for image 
+            generation. So, we condition the UNet on the digit 0-9, using a one-hot vector. Below (from the top down), we have 
+            a sample from the 5th epoch, and then the training curve for the entire training process, and then the 
+            sample from the 20th epoch. 
+        </p>
+    </section>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB3.1.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB3.2.png" alt="Orange">
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/PartB3.3.png" alt="Orange">
+        </div>
+    </div>
+    </div>
