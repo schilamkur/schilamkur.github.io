@@ -55,7 +55,7 @@
     <h1>Predicting Formula 1 Tire Degradation</h1>
 
     <div class="section">
-        <h2>🚗 Introduction and Motivation</h2>
+        <h2>Introduction and Motivation</h2>
         <p>
             Formula 1 is defined by milliseconds. Tire performance is a critical factor influencing lap times, pit stop strategy, and overall race outcomes. Yet, understanding when a tire will "fall off the cliff" is often part science, part art.
         </p>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="section">
-        <h2>🗂️ Data Collection and Labeling</h2>
+        <h2>Data Collection and Labeling</h2>
         <p>
             Using the <code>FastF1</code> Python library, we collected detailed lap-by-lap data for every race from the 2022 to 2025 F1 seasons (up to the 2025 Canadian GP). Each lap record includes lap time, compound, tire age, driver+team stats, 
             track info, weather readings, and session metadata.
@@ -97,7 +97,7 @@
     </div>
 
     <div class="section">
-        <h2>🧠 Modeling Approach</h2>
+        <h2>Modeling Approach</h2>
         <p>
             The target variable is <strong>tire_life</strong> — the number of laps into a stint before degradation. We applied a <code>PowerTransformer</code> 
             to normalize its distribution (because tire degradation is not simply linear).
@@ -118,7 +118,7 @@
     </div>
 
     <div class="section">
-        <h2>📊 Results</h2>
+        <h2>Results</h2>
         <p>Performance metrics (MAE):</p>
         <table class="result-table">
             <thead>
@@ -144,7 +144,7 @@
     </div>
 
     <div class="section">
-        <h2>📁 Code & Reproducibility</h2>
+        <h2>Code & Reproducibility</h2>
         <p>
             All code, data processing functions, and model training pipelines are available here:
             <a href="https://github.com/schilamkur/F1-Tire-Degradation" target="_blank">GitHub Repository</a>.
