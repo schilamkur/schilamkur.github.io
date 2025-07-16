@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Financial Fraud Detection System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      color: #1f1f1f;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+    }
+    header {
+      background-color: #1f2d3d;
+      color: #ffffff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    header p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #d3d3d3;
+    }
+    .container {
+      max-width: 880px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    h2 {
+      color: #2d3e50;
+      font-size: 1.5rem;
+      font-weight: 600;
+      border-left: 4px solid #4a6fa5;
+      padding-left: 0.75rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      margin-left: 1.5rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+    }
+    pre {
+      background-color: #f0f2f5;
+      padding: 1rem;
+      border-left: 4px solid #4a6fa5;
+      border-radius: 4px;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #eef1f4;
+      color: #777;
+      font-size: 0.95rem;
+      margin-top: 5rem;
+    }
+    a {
+      color: #3267d6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Financial Fraud Detection & Risk Mitigation System</h1>
+  <p>A sophisticated solution designed to identify fraudulent transactions within large-scale financial datasets, improving operational security and reducing losses.</p>
+</header>
+
+<div class="container">
+
+  <h2>Project Overview</h2>
+  <p>
+    This project implements a comprehensive fraud detection pipeline leveraging advanced data preprocessing, feature engineering, and ensemble modeling to identify suspicious activity in transactional data with high accuracy and recall.
+  </p>
+
+  <h2>Objectives</h2>
+  <ul>
+    <li>Detect fraudulent transactions rapidly and reliably across millions of data points</li>
+    <li>Maximize recall to minimize undetected fraud while maintaining strong precision</li>
+    <li>Build scalable models robust to class imbalance and evolving fraud patterns</li>
+  </ul>
+
+  <h2>Data & Feature Engineering</h2>
+  <ul>
+    <li>Utilizes detailed transactional data including anonymized numerical attributes and temporal patterns</li>
+    <li>Derives advanced features capturing temporal behavior, transaction velocity, and aggregate statistics</li>
+    <li>Transforms cyclical time variables (e.g., hour-of-day) to better encode periodic patterns</li>
+    <li>Applies robust scaling to improve convergence and handle skewed distributions</li>
+  </ul>
+
+  <h2>Modeling Architecture</h2>
+  <p>
+    The system integrates multiple specialized classifiers into a stacked ensemble architecture designed for high-performance fraud detection under severe class imbalance. Key components include:
+  </p>
+  <ul>
+    <li><strong>Dimensionality Compression:</strong> Captures latent structure via unsupervised reconstruction techniques</li>
+    <li><strong>Time-Aware Feature Blocks:</strong> Encodes short- and long-term transactional behavior</li>
+    <li><strong>Gradient-Ensembled Classification:</strong> Combines tree-based learners with rare-event reweighting</li>
+    <li><strong>Probability Calibration:</strong> Post-model calibration improves interpretability of fraud scores</li>
+  </ul>
+
+  <h2>Performance & Evaluation</h2>
+  <p>
+    The model was evaluated on a stratified test set using key classification metrics. Below are the results:
+  </p>
+
+  <pre>
+Confusion Matrix:
+[[56846    18]
+ [   16    82]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9997    0.9997    0.9997     56864
+           1     0.8200    0.8367    0.8283        98
+
+    accuracy                         0.9994     56962
+   macro avg     0.9099    0.9182    0.9140     56962
+weighted avg     0.9994    0.9994    0.9994     56962
+  </pre>
+
+  <p>
+    These results reflect <strong>over 82% precision</strong> and <strong>83.7% recall</strong> on the fraud class, with an overall accuracy of <strong>99.94%</strong>. The model achieves strong identification power while maintaining a very low false positive rate — critical for real-world deployment in financial systems.
+  </p>
+
+  <h2>Business Impact</h2>
+  <p>
+    This fraud detection system is designed for high-throughput financial environments, offering real-time inference capability and modular integration into existing fraud/risk infrastructure. It supports:
+  </p>
+  <ul>
+    <li>Real-time monitoring of transactional pipelines</li>
+    <li>Batch risk scoring for auditing and compliance</li>
+    <li>Scalable alert generation and risk reporting workflows</li>
+  </ul>
+
+  <h2>Code</h2>
+  <p>
+    If you want access to the codebase, reach out to schilamkur@gmail.com.
+  </p>
+
+</div>
+
+<footer>
+  &copy; 2025 Siddharth Chilamkur &mdash; All rights reserved.
+</footer>
+
+</body>
+</html>
