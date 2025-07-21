@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Siddharth Chilamkur | Portfolio</title>
+  <title>Siddharth Chilamkur | ML • Finance • Aerospace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +12,6 @@
 
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Inter', sans-serif;
       background-color: #f8f9fa;
       color: #2c2c2c;
@@ -22,109 +21,170 @@
     header {
       background-color: #1f2d3d;
       color: #ffffff;
-      padding: 3rem 1rem 2rem;
+      padding: 2rem 1rem;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     header h1 {
-      font-size: 2.7rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.8rem;
+      margin-bottom: 0.3rem;
       font-weight: 600;
     }
 
     header p {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #cbd5e1;
       margin: 0;
     }
 
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-    }
-
-    .about {
-      text-align: center;
-      margin-bottom: 3rem;
-      max-width: 700px;
+    /* Standardize all images */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
       margin-left: auto;
       margin-right: auto;
     }
 
-    .about h2 {
-      font-size: 1.5rem;
-      color: #2d3e50;
-      font-weight: 600;
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      background-color: #ffffff;
+    }
+
+    /* Limit profile image size */
+    .profile img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #e0e0e0;
-      display: inline-block;
-      padding-bottom: 0.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about {
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 1.7rem;
+      color: #1f2d3d;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
     .about p {
       font-size: 1.05rem;
       color: #444;
-      margin-top: 0;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.75rem;
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .projects h2 {
+      font-size: 1.6rem;
+      color: #1f2d3d;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
     .project-card {
+      display: flex;
+      flex-direction: column;
       background-color: #ffffff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s ease;
       text-decoration: none;
       color: inherit;
-      border-left: 5px solid #6c757d;
     }
 
     .project-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-      border-left-color: #495057;
     }
 
-    .project-card h2 {
-      font-size: 1.1rem;
+    .project-image {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content h3 {
       margin-top: 0;
+      font-size: 1.3rem;
       color: #343a40;
-      font-weight: 600;
     }
 
-    .project-card p {
-      margin: 0.5rem 0 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .project-content p {
+      font-size: 0.98rem;
       color: #555;
+      margin-bottom: 0;
+    }
+
+    section.education {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    section.education h2,
+    section.experience h2 {
+      color: #1f2d3d;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    section.education p,
+    section.experience p {
+      font-size: 1rem;
+      color: #444;
+      margin: 0.3rem 0;
+    }
+
+    section.experience {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
     }
 
     footer {
       text-align: center;
       padding: 2rem 1rem;
       background-color: #eef1f4;
-      color: #888;
       font-size: 0.9rem;
+      color: #888;
     }
 
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 2rem;
+    footer a {
+      color: #888;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .project-content h3 {
+        font-size: 1.2rem;
+      }
+      .project-content p {
+        font-size: 0.95rem;
       }
 
-      .about h2 {
-        font-size: 1.3rem;
-      }
-
-      .about p {
-        font-size: 1rem;
+      .project-image {
+        max-height: 140px;
       }
     }
   </style>
@@ -133,80 +193,154 @@
 
 <header>
   <h1>Siddharth Chilamkur</h1>
-  <p>ML · Optimization · Vision Projects</p>
+  <p>Machine Learning · Optimization · Finance · Aerospace</p>
 </header>
 
-<main>
-
-  <section class="about">
+<section class="profile">
+  <img src="profile.jpg" alt="Siddharth Chilamkur">
+  <div class="about">
     <h2>About Me</h2>
     <p>
-      I'm a machine learning and computer vision enthusiast with a strong foundation in optimization and data-driven modeling.
-      I enjoy building scalable systems that bridge theory and the real world — from sports analytics to generative modeling.
+      I'm a machine learning and optimization enthusiast with deep interests in finance and aerospace applications. I thrive at the intersection of theory and practical systems — building intelligent pipelines, forecasting models, and scalable infrastructure for real-world impact.
     </p>
-  </section>
+  </div>
+</section>
 
-  <section class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <a href="./TradingSP500/index.html" class="project-card">
-        <h2>Equity Strategy Backtest</h2>
-        <p>Built a quant backtesting pipeline to simulate long-short portfolios from machine learning-predicted signals. Evaluated with Sharpe, Sortino, and Calmar ratios.</p>
-      </a>
+<section class="education">
+  <h2>Education</h2>
+  <p><strong>University of California, Berkeley</strong> – B.S. in Electrical Engineering & Computer Science, B.A. in Economics (Expected May 2026)</p>
+  <p><em>Relevant coursework:</em> Machine Learning, Artificial Intelligence, NLP, Agentic AI, Computer Vision, Optimization, Robotics, Database Systems, Financial Economics, Antitrust, Econometrics, Industrial Organization</p>
+</section>
 
-      <a href="./Earnings-Sentiment/index.html" class="project-card">
-        <h2>Earnings Sentiment & Return Forecasting</h2>
-        <p>Used NLP to quantify sentiment in earnings call transcripts and predict short-term stock movement using regression-based modeling.</p>
-      </a>      
+<section class="experience">
+  <h2>Professional Experience</h2>
 
-      <a href="./Fraud-Detection/index.html" class="project-card">
-        <h2>Financial Fraud Detection & Risk Mitigation</h2>
-        <p>Developed an ensemble ML pipeline for detecting fraud in large-scale transactional data with 92.3% recall and 0.983 AUC. Designed for enterprise-grade security monitoring.</p>
-      </a>
-
-      <a href="./Predict-Tire-Deg/index.html" class="project-card">
-        <h2>Formula 1 - Predicting Tire Degradation</h2>
-        <p>Built a regression pipeline using telemetry and SHAP analysis to anticipate tire drop-off during stints.</p>
-      </a>
-
-      <a href="./Predict-Pitch-Outcome/index.html" class="project-card">
-        <h2>MLB Pitch Outcome Prediction</h2>
-        <p>Designed a two-tier classification system using Statcast data and gradient boosting models to predict pitch outcomes with strong accuracy and interpretability.</p>
-      </a>
-
-      <a href="./NeRF/index.html" class="project-card">
-        <h2>Neural Radiance Fields (NeRF)</h2>
-        <p>Trained NeRFs to synthesize novel 3D views from 2D inputs using volumetric rendering and positional encoding.</p>
-      </a>
-
-      <a href="./Diffusion/index.html" class="project-card">
-        <h2>Diffusion Modeling</h2>
-        <p>Implemented DDPM to generate images via iterative denoising. Explored training dynamics and noise scheduling.</p>
-      </a>
-
-      <a href="./Face-Morphing/index.html" class="project-card">
-        <h2>Face Morphing</h2>
-        <p>Used Delaunay triangulation and affine warping to morph facial structures and create extrapolated caricatures.</p>
-      </a>
-
-      <a href="./Prokudin-Gorskii/index.html" class="project-card">
-        <h2>Coloring Prokudin-Gorskii Images</h2>
-        <p>Aligned glass-plate negatives to reconstruct color photos using pyramid-based SSD and edge alignment.</p>
-      </a>
-
-      <a href="./Filters+Frequencies/index.html" class="project-card">
-        <h2>Filters and Frequencies</h2>
-        <p>Constructed Gaussian and Laplacian stacks to analyze and synthesize hybrid images across frequency bands.</p>
-      </a>
-
+  <div class="project-card">
+    <div class="project-content">
+      <h3>National Aeronautics and Space Administration</h3>
+      <img src="project-images/nasa.jpeg" alt="NASA" class="project-image">
+      <p>
+        I've been an ML/AI and Engineering intern since the summer of 2023, working on predictive analysis for 
+        flight trajectories, traffic management initiatives for ATC controllers, and climate modeling.
+      </p>
     </div>
-  </section>
+  </div>
 
+  <div class="project-card">
+    <div class="project-content">
+      <h3>Optimization Research</h3>
+      <img src="project-images/optimization.webp" alt="Optimization" class="project-image">
+      <p>
+        Currently conducting optimization research with Prof. Hochbaum, specifically working in the areas of active learning, anti-clustering, and scenario reduction techniques
+        as they apply to real-world systems.
+      </p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="projects">
+    <h2>Selected Projects</h2>
+
+    <a href="./TradingSP500/index.html" class="project-card">
+      <img src="project-images/equity-strategy.png" alt="Equity Strategy" class="project-image">
+      <div class="project-content">
+        <h3>Equity Strategy Backtest</h3>
+        <p>Simulated long-short portfolios based on ML signals. Evaluated with Sharpe, Sortino, and Calmar ratios in a production-ready backtesting pipeline.</p>
+      </div>
+    </a>
+
+    <a href="./Earnings-Sentiment/index.html" class="project-card">
+      <img src="project-images/sentiment.webp" alt="Earnings Sentiment" class="project-image">
+      <div class="project-content">
+        <h3>Earnings Sentiment & Return Forecasting</h3>
+        <p>Used NLP and transformer embeddings to extract sentiment from earnings calls and predict near-term returns using regression models.</p>
+      </div>
+    </a>
+
+    <a href="./Fraud-Detection/index.html" class="project-card">
+      <img src="project-images/fraud-detection.png" alt="Financial Fraud Detection" class="project-image">
+      <div class="project-content">
+        <h3>Financial Fraud Detection</h3>
+        <p>Developed a real-time ensemble ML pipeline with 92.3% recall and 0.983 AUC, designed for enterprise-scale risk detection and compliance.</p>
+      </div>
+    </a>
+
+    <a href="./Predict-Tire-Deg/index.html" class="project-card">
+      <img src="project-images/tire-degradation.jpg" alt="Tire Degradation" class="project-image">
+      <div class="project-content">
+        <h3>F1 Tire Degradation Modeling</h3>
+        <p>Regression model with SHAP-based interpretability to predict tire performance drop-off using telemetry data from Formula 1 races.</p>
+      </div>
+    </a>
+
+    <a href="./Predict-Pitch-Outcome/index.html" class="project-card">
+      <img src="project-images/pitch-outcome.jpg" alt="MLB Prediction" class="project-image">
+      <div class="project-content">
+        <h3>MLB Pitch Outcome Prediction</h3>
+        <p>Two-tier gradient boosting classifier trained on Statcast data to predict pitch outcomes with interpretable feature importance.</p>
+      </div>
+    </a>
+
+    <a href="./NeRF/index.html" class="project-card">
+      <img src="project-images/nerf.jpg" alt="NeRF" class="project-image">
+      <div class="project-content">
+        <h3>Neural Radiance Fields (NeRF)</h3>
+        <p>Trained volumetric rendering models to synthesize new 3D views from 2D images using positional encoding and MLPs.</p>
+      </div>
+    </a>
+
+    <a href="./Diffusion/index.html" class="project-card">
+      <img src="project-images/diffusion.png" alt="Diffusion" class="project-image">
+      <div class="project-content">
+        <h3>Diffusion Modeling</h3>
+        <p>Implemented a Denoising Diffusion Probabilistic Model (DDPM) to generate high-quality images with custom beta schedules.</p>
+      </div>
+    </a>
+
+    <a href="./Face-Morphing/index.html" class="project-card">
+      <img id="morphGif" src="project-images/face-morphing.jpg" alt="Face Morphing" class="project-image">
+      <div class="project-content">
+        <h3>Face Morphing</h3>
+        <p>Used Delaunay triangulation, affine warping, and image blending to morph between facial landmarks and generate caricatures.</p>
+      </div>
+    </a>
+
+    <a href="./Prokudin-Gorskii/index.html" class="project-card">
+      <img src="project-images/prokudin.jpg" alt="Prokudin-Gorskii" class="project-image">
+      <div class="project-content">
+        <h3>Colorizing Prokudin-Gorskii</h3>
+        <p>Reconstructed color photos from century-old negatives using SSD alignment, image pyramids, and edge detection.</p>
+      </div>
+    </a>
+
+    <a href="./Filters+Frequencies/index.html" class="project-card">
+      <img src="project-images/blended_oraple.jpg" alt="Filters and Frequencies" class="project-image">
+      <div class="project-content">
+        <h3>Filters and Frequencies</h3>
+        <p>Created hybrid images by constructing and manipulating Laplacian and Gaussian stacks across spatial frequency bands.</p>
+      </div>
+    </a>
+
+  </section>
 </main>
 
 <footer>
-  &copy; 2025 Siddharth Chilamkur &mdash; All rights reserved.
+  &copy; 2025 Siddharth Chilamkur &mdash; All rights reserved.<br>
+  <a href="mailto:schilamkur@gmail.com">Email</a> |
+  <a href="https://linkedin.com/in/siddharth-chilamkur" target="_blank">LinkedIn</a> |
+  <a href="https://github.com/schilamkur" target="_blank">GitHub</a>
 </footer>
+
+<script>
+  window.addEventListener('load', function () {
+    var morphImg = document.getElementById('morphGif');
+    if (morphImg) {
+      var randomNum = Math.floor(Math.random() * 10000);
+      morphImg.src = "project-images/morph_sequence.gif?" + randomNum;
+    }
+  });
+</script>
 
 </body>
 </html>
